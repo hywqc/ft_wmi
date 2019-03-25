@@ -1,0 +1,17 @@
+VERSION
+*.swp
+*.un~
+*.msi
+*.wixobj
+*.sdf
+*.opensdf
+*.pdb
+*.idb
+*.tlog
+*.ilk
+*.exe
+*.obj
+*.res
+temp/
+ipch/
+attach/
