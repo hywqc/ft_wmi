@@ -12,6 +12,7 @@ VERSION
 *.exe
 *.obj
 *.res
+*.ipch
+*.aps
 temp/
 ipch/
-attach/
