@@ -22,13 +22,13 @@
 #pragma comment(lib, "yaml_static.lib")
 #endif
 
-LPCTSTR AppName = _T("王教授主机诊断探针");
+LPCTSTR AppName = _T("王教授主机诊断探针集群版");
 LPCTSTR AppNameEn = _T("ProfWang Probe");
 extern LPCTSTR ServiceName = _T("ProfWang Probe Service"); 
-extern LPCTSTR ServiceDescription = _T("支持收集主机相关监控指标并上报到王教授中进行诊断"); 
+extern LPCTSTR ServiceDescription = _T("支持收集主机相关监控指标"); 
 
 
-EditionType gEditionType = EditionType_Release;
+EditionType gEditionType = EditionType_Test;
 
 HINSTANCE hInst;
 HWND hMainDlg = NULL;
@@ -57,10 +57,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	switch(gEditionType)
 	{
 	case EditionType_Propord:
-		AppName = _T("王教授主机诊断探针(预发)");
+		AppName = _T("王教授主机诊断探针集群版(预发)");
 		break;
 	case EditionType_Test:
-		AppName = _T("王教授主机诊断探针(测试)");
+		AppName = _T("王教授主机诊断探针集群版(测试)");
 		break;
 	default:
 		break;

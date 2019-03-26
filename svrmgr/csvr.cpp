@@ -44,38 +44,38 @@ namespace CloudCare {
 	{
 		wstring line = exepath;
 		line += _T(" --init ");
-		line += (_T(" --team-id ") + teamid);
+		//line += (_T(" --team-id ") + teamid);
 		//path += (_T(" --uploader-uid ") + assetid);
-		line += (_T(" --ak ") + ak);
-		line += (_T(" --sk ") + sk);
-		if (!ip.empty())
+		//line += (_T(" --ak ") + ak);
+		//line += (_T(" --sk ") + sk);
+		/*if (!ip.empty())
 		{
 			line += (_T(" --host ") + ip);
-		}
+		}*/
 		if (!port.empty())
 		{
 			line += (_T(" --port ") + port);
 		}
-		switch(gEditionType)
-		{
-		case EditionType_Test:
-			line += _T(" --remote-host http://testing.kodo.cloudcare.cn:10401 ");
-			break;
-		case EditionType_Propord:
-			line += _T(" --remote-host https://preprod-kodo.cloudcare.cn ");
-			break;
-		case EditionType_Release:
-			line += _T(" --remote-host https://kodo.cloudcare.cn ");
-			break;
-		default:
-			break;
-		}
+		//switch(gEditionType)
+		//{
+		//case EditionType_Test:
+		//	line += _T(" --remote-host http://testing.kodo.cloudcare.cn:10401 ");
+		//	break;
+		//case EditionType_Propord:
+		//	line += _T(" --remote-host https://preprod-kodo.cloudcare.cn ");
+		//	break;
+		//case EditionType_Release:
+		//	line += _T(" --remote-host https://kodo.cloudcare.cn ");
+		//	break;
+		//default:
+		//	break;
+		//}
 
 		//if (!remotehost.empty())
 		//{
 		//	line += (_T(" --remote-host ") + remotehost);
 		//}
-		line += (_T(" --enabled ") + enabledMetricsStringValue());
+		//line += (_T(" --enabled ") + enabledMetricsStringValue());
 
 		return line;
 	} 
@@ -92,14 +92,14 @@ namespace CloudCare {
 	{
 		wstring line = exepath;
 		line += _T(" --update-cfg ");
-		line += (_T(" --team-id ") + teamid);
+		//line += (_T(" --team-id ") + teamid);
 		//path += (_T(" --uploader-uid ") + assetid);
-		line += (_T(" --ak ") + ak);
-		line += (_T(" --sk ") + sk);
-		if (!ip.empty())
-		{
-			line += (_T(" --host ") + ip);
-		}
+		//line += (_T(" --ak ") + ak);
+		//line += (_T(" --sk ") + sk);
+		//if (!ip.empty())
+		//{
+		//	line += (_T(" --host ") + ip);
+		//}
 		if (!port.empty())
 		{
 			line += (_T(" --port ") + port);
@@ -108,7 +108,7 @@ namespace CloudCare {
 		//{
 		//	line += (_T(" --remote-host ") + remotehost);
 		//}
-		line += (_T(" --enabled ") + enabledMetricsStringValue());
+		//line += (_T(" --enabled ") + enabledMetricsStringValue());
 
 		return line;
 	}

@@ -435,7 +435,7 @@ namespace CloudCare {
 			switch(gEditionType)
 			{
 			case EditionType_Test:
-				versionUrl = _T("/profwang_probe/windows/test/version");
+				versionUrl = _T("/ft_wmi_exporter/test/version");
 				break;
 			case EditionType_Propord:
 				versionUrl = _T("/profwang_probe/windows/preprod/version");

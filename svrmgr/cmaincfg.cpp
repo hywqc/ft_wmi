@@ -76,13 +76,13 @@ namespace CloudCare
 		HWND hCancelBtn = GetDlgItem(hDlg, IDCANCEL);
 		HWND hInstallBtn = GetDlgItem(hDlg, IDOK);
 		HWND hUpgradeBtn = GetDlgItem(hDlg, IDC_BUTTON_UPGRADE);
-		HWND hEditTeamID = GetDlgItem(hDlg, IDC_EDIT_TEAMID);
-		EnableWindow(hEditTeamID, TRUE);
+		//HWND hEditTeamID = GetDlgItem(hDlg, IDC_EDIT_TEAMID);
+		//EnableWindow(hEditTeamID, TRUE);
 
 		type = typ;
 		if (typ == FOR_CONFIG)
 		{
-			EnableWindow(hEditTeamID, FALSE);
+			//EnableWindow(hEditTeamID, FALSE);
 			SetWindowText(hDlg, (std::wstring(AppName)+_T(" 配置")).c_str());
 			
 			::ShowWindow(hInstallBtn, SW_HIDE);
@@ -186,14 +186,14 @@ namespace CloudCare
 	{
 		ServiceArgsInfo info;
 		fillInfoFromEdits(info);
-		if (info.teamid.empty()
-			//|| info.assetid.empty()
-			|| info.ak.empty()
-			|| info.sk.empty())
-		{
-			::MessageBox(hDlg, _T("带 * 的为必填项, 不能为空"), MB_TITLE_TEXT, MB_OKCANCEL);
-			return FALSE;
-		}
+		//if (info.teamid.empty()
+		//	//|| info.assetid.empty()
+		//	|| info.ak.empty()
+		//	|| info.sk.empty())
+		//{
+		//	::MessageBox(hDlg, _T("带 * 的为必填项, 不能为空"), MB_TITLE_TEXT, MB_OKCANCEL);
+		//	return FALSE;
+		//}
 
 		CSvrManager::shareInstance().service.argsInfo = info;
 
@@ -302,7 +302,7 @@ namespace CloudCare
 							}
 							::MessageBoxEx(hDlg, errmsg.c_str(), MB_TITLE_TEXT, MB_OK|MB_ICONWARNING, 0);
 						} else {
-							::MessageBox(hDlg, CC::getLastErrorString(GetLastError(), _T("安装失败:")).c_str(), MB_TITLE_TEXT, MB_OK|MB_ICONWARNING);
+							::MessageBox(hDlg, _T("安装失败:"), MB_TITLE_TEXT, MB_OK|MB_ICONWARNING);
 						}
 						return FALSE;
 					}
@@ -389,14 +389,14 @@ namespace CloudCare
 	 {
 		 ServiceArgsInfo info;
 		 fillInfoFromEdits(info);
-		 if (info.teamid.empty()
-			 //|| info.assetid.empty()
-			 || info.ak.empty()
-			 || info.sk.empty())
-		 {
-			 ::MessageBox(hDlg, _T("带 * 的为必填项, 不能为空"), MB_TITLE_TEXT, MB_OKCANCEL);
-			 return FALSE;
-		 }
+		 //if (info.teamid.empty()
+			// //|| info.assetid.empty()
+			// || info.ak.empty()
+			// || info.sk.empty())
+		 //{
+			// ::MessageBox(hDlg, _T("带 * 的为必填项, 不能为空"), MB_TITLE_TEXT, MB_OKCANCEL);
+			// return FALSE;
+		 //}
 
 		 long port = wcstol(info.port.c_str(), nullptr, 10);
 		 if (info.port.length()>5 || port <=0 || port > 65535)
@@ -509,28 +509,28 @@ namespace CloudCare
 
 	 void CMainCfgDialog::fillEditsFromCfg(const ServiceArgsInfo &cfg)
 	 {
-		 HWND hEditTeamID = GetDlgItem(hDlg, IDC_EDIT_TEAMID);
-		 HWND hEditAssetID = GetDlgItem(hDlg, IDC_EDIT_ASSETID);
-		 HWND hEditAK = GetDlgItem(hDlg, IDC_EDIT_AK);
-		 HWND hEditSK = GetDlgItem(hDlg, IDC_EDIT_SK);
-		 HWND hEditIP = GetDlgItem(hDlg, IDC_EDIT_IP);
+		 //HWND hEditTeamID = GetDlgItem(hDlg, IDC_EDIT_TEAMID);
+		 //HWND hEditAssetID = GetDlgItem(hDlg, IDC_EDIT_ASSETID);
+		 //HWND hEditAK = GetDlgItem(hDlg, IDC_EDIT_AK);
+		 //HWND hEditSK = GetDlgItem(hDlg, IDC_EDIT_SK);
+		 //HWND hEditIP = GetDlgItem(hDlg, IDC_EDIT_IP);
 		 HWND hEditPort = GetDlgItem(hDlg, IDC_EDIT_PORT);
-		 HWND hEditRemoteHost = GetDlgItem(hDlg, IDC_EDIT_REMOTEHOST);
+		 //HWND hEditRemoteHost = GetDlgItem(hDlg, IDC_EDIT_REMOTEHOST);
 
-		 Edit_SetText(hEditTeamID, cfg.teamid.c_str());
-		 Edit_SetText(hEditAssetID, cfg.assetid.c_str());
-		 Edit_SetText(hEditAK, cfg.ak.c_str());
-		 Edit_SetText(hEditSK, cfg.sk.c_str());
-		 if (cfg.ip != _T("default"))
-		 {
-			 Edit_SetText(hEditIP, cfg.ip.c_str());
-		 }
+		 //Edit_SetText(hEditTeamID, cfg.teamid.c_str());
+		 //Edit_SetText(hEditAssetID, cfg.assetid.c_str());
+		 //Edit_SetText(hEditAK, cfg.ak.c_str());
+		 //Edit_SetText(hEditSK, cfg.sk.c_str());
+		 //if (cfg.ip != _T("default"))
+		 //{
+			// Edit_SetText(hEditIP, cfg.ip.c_str());
+		 //}
 		 Edit_SetText(hEditPort, cfg.port.c_str());
 		 if (cfg.port.empty())
 		 {
 			 Edit_SetText(hEditPort, _T("9100"));
 		 }
-		 Edit_SetText(hEditRemoteHost, cfg.remotehost.c_str());
+		 //Edit_SetText(hEditRemoteHost, cfg.remotehost.c_str());
 	 }
 
 	 void CMainCfgDialog::onNewVersion()
