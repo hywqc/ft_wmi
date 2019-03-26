@@ -28,7 +28,7 @@ extern LPCTSTR ServiceName = _T("ProfWang Probe Service");
 extern LPCTSTR ServiceDescription = _T("支持收集主机相关监控指标并上报到王教授中进行诊断"); 
 
 
-EditionType gEditionType = EditionType_Release;
+EditionType gEditionType = EditionType_Test;
 
 HINSTANCE hInst;
 HWND hMainDlg = NULL;
