@@ -60,7 +60,7 @@ namespace CloudCare
 		nid.uFlags =  NIF_MESSAGE|NIF_ICON|NIF_TIP|NIF_INFO;
 		nid.uCallbackMessage = WM_TRAY;
 		nid.hIcon = LoadIcon(hInst, MAKEINTRESOURCE(IDI_SVRMGR));
-		lstrcpy(nid.szTip, _T("王教授主机诊断探针"));
+		lstrcpy(nid.szTip, _T("FT WMI Exporter"));
 
 		return Shell_NotifyIcon(NIM_ADD, &nid);
 	}

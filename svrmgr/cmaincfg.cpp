@@ -12,7 +12,6 @@
 
 namespace CloudCare
 {
-
 	INT_PTR CALLBACK CMainCfgDialog::dlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) 
 	{
 		CMainCfgDialog *mc = (CMainCfgDialog *)GetWindowLongPtr(hDlg, DWLP_USER);
@@ -342,6 +341,15 @@ namespace CloudCare
 		 {
 			 return;
 		 }
+
+		 TCHAR portbuf[20]={0};
+		 Edit_GetText(GetDlgItem(hDlg, IDC_EDIT_PORT), portbuf, _countof(portbuf));
+		 std::wstring portstr= CC::trim(portbuf);
+		 int newport = wcstol(portstr.c_str(), 0, 10);
+		 if(portstr != CSvrManager::shareInstance().service.argsInfo.port && checkPortIsUsed(newport)) {
+			 MessageBox(hDlg, _T("端口被占用"), MB_TITLE_TEXT, MB_OK|MB_ICONWARNING);
+			 return;
+		 }
 		
 		 Button_Enable(GetDlgItem(hDlg, IDOK), FALSE);
 		if(!action(ActionType_Install)){
@@ -362,6 +370,15 @@ namespace CloudCare
 	 {
 		 if (!checkRequiredArgs())
 		 {
+			 return;
+		 }
+
+		 TCHAR portbuf[20]={0};
+		 Edit_GetText(GetDlgItem(hDlg, IDC_EDIT_PORT), portbuf, _countof(portbuf));
+		 std::wstring portstr= CC::trim(portbuf);
+		 int newport = wcstol(portstr.c_str(), 0, 10);
+		 if(portstr != CSvrManager::shareInstance().service.argsInfo.port && checkPortIsUsed(newport)) {
+			 MessageBox(hDlg, _T("端口被占用"), MB_TITLE_TEXT, MB_OK|MB_ICONWARNING);
 			 return;
 		 }
 

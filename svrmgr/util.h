@@ -12,7 +12,6 @@ extern LPCTSTR AppName;
 extern wstring gRemoteHostUrl;
 
 
-
 enum EditionType {
 	EditionType_Test = 0,
 	EditionType_Propord,
@@ -21,7 +20,7 @@ enum EditionType {
 
 #define WM_DETECT_NEW_VERSION (WM_USER+1)
 
-#define MB_TITLE_TEXT _T("王教授主机诊断探针")
+#define MB_TITLE_TEXT _T("FT WMI Exporter")
 
 namespace CloudCare {
 
@@ -58,6 +57,8 @@ namespace CloudCare {
 	void startCheckVersion();
 
 	BOOL checkVersion(std::string &response);
+
+	std::wstring getOssBucket();
 
 	std::wstring getServiceErrText();
 

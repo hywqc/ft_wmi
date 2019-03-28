@@ -22,10 +22,10 @@
 #pragma comment(lib, "yaml_static.lib")
 #endif
 
-LPCTSTR AppName = _T("王教授主机诊断探针集群版");
-LPCTSTR AppNameEn = _T("ProfWang Probe");
-extern LPCTSTR ServiceName = _T("ProfWang Probe Service"); 
-extern LPCTSTR ServiceDescription = _T("支持收集主机相关监控指标"); 
+LPCTSTR AppName = _T("FT WMI Exporter");
+LPCTSTR AppNameEn = _T("FT WMI Exporter");
+extern LPCTSTR ServiceName = _T("ft wmi exporter"); 
+extern LPCTSTR ServiceDescription = _T("使用WMI收集主机相关监控指标"); 
 
 
 EditionType gEditionType = EditionType_Test;
@@ -57,17 +57,17 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	switch(gEditionType)
 	{
 	case EditionType_Propord:
-		AppName = _T("王教授主机诊断探针集群版(预发)");
+		AppName = _T("FT WMI Exporter(预发)");
 		break;
 	case EditionType_Test:
-		AppName = _T("王教授主机诊断探针集群版(测试)");
+		AppName = _T("FT WMI Exporter(测试)");
 		break;
 	default:
 		break;
 	}
 
 
-	HANDLE hMutex = CreateMutex(nullptr, FALSE, _T("profwangprobe"));
+	HANDLE hMutex = CreateMutex(nullptr, FALSE, _T("ftwmiexporter"));
 	DWORD dwerr = GetLastError();
 	if (hMutex)
 	{
@@ -132,7 +132,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			ShowWindow(hMainDlg, SW_HIDE);
 
 			CC::CTrayIcon::shareInstance().show();
-			CC::CTrayIcon::shareInstance().showTrayMsg(_T("点击此处进行管理"), _T("王教授主机诊断探针"));
+			CC::CTrayIcon::shareInstance().showTrayMsg(_T("点击此处进行管理"), AppName);
 		}
 	}
 

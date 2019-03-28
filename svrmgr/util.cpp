@@ -56,17 +56,17 @@ namespace CloudCare {
 		TCHAR buf[MAX_PATH]={0};
 		::SHGetSpecialFolderPath(NULL,buf,CSIDL_PROGRAM_FILES,FALSE);
 		::PathCombine(buf,buf,_T("CloudCare\\"));
-		::PathCombine(buf, buf, _T("ProfWangProbe"));
+		::PathCombine(buf, buf, _T("ft_wmi_exporter"));
 		::SHCreateDirectory(NULL, buf);
 		return wstring(buf);
 	}
 
 	wstring getTargetExePath() {
-		return getTargetInstallDir()+_T("\\probe.exe");
+		return getTargetInstallDir()+_T("\\ft_wmi_exporter.exe");
 	}
 
 	wstring getTargetYamPath() {
-		return getTargetInstallDir()+_T("\\probe.yml");
+		return getTargetInstallDir()+_T("\\ft_wmi_exporter.yml");
 	}
 
 	wstring getTargetVersionPath() {
@@ -428,6 +428,26 @@ namespace CloudCare {
 			return result;
 		}
 
+		std::wstring getOssBucket()
+		{
+			LPCTSTR ossbuckset;
+
+			switch(gEditionType)
+			{
+			case EditionType_Test:
+				ossbuckset = _T("cloudcare-kodo.oss-cn-hangzhou.aliyuncs.com");
+				break;
+			case EditionType_Propord:
+				ossbuckset = _T("cloudcare-kodo.oss-cn-hangzhou.aliyuncs.com");
+				break;
+			case EditionType_Release:
+				ossbuckset = _T("cloudcare-files.oss-cn-hangzhou.aliyuncs.com");
+				break;
+			}
+
+			return ossbuckset;
+		}
+
 		BOOL checkVersion(std::string &response)
 		{
 			LPCTSTR versionUrl;
@@ -438,10 +458,10 @@ namespace CloudCare {
 				versionUrl = _T("/ft_wmi_exporter/test/version");
 				break;
 			case EditionType_Propord:
-				versionUrl = _T("/profwang_probe/windows/preprod/version");
+				versionUrl = _T("/ft_wmi_exporter/preprod/version");
 				break;
 			case EditionType_Release:
-				versionUrl = _T("/profwang_probe/windows/release/version");
+				versionUrl = _T("/ft_wmi_exporter/release/version");
 				break;
 			}
 
@@ -463,7 +483,7 @@ namespace CloudCare {
 				goto end;
 			}
 
-			hConnect = WinHttpConnect(hSession, _T("cloudcare-kodo.oss-cn-hangzhou.aliyuncs.com"), INTERNET_DEFAULT_HTTP_PORT, 0);
+			hConnect = WinHttpConnect(hSession, getOssBucket().c_str(), INTERNET_DEFAULT_HTTP_PORT, 0);
 			if (!hConnect)
 			{
 				goto end;

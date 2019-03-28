@@ -5,6 +5,7 @@
 #include <ShellAPI.h>
 #include "csvr.h"
 #include <fstream>
+#include <strsafe.h>
 
 namespace CloudCare
 {
@@ -47,25 +48,28 @@ namespace CloudCare
 	
 						UINT nret = runCmd(cmdline.c_str());
 
-						std::wstring durl;
-						std::wstring filepath = getTargetInstallDir()+ _T("\\dowload_url");
-						std::ifstream inf(wide2string(filepath).c_str(), std::ios::in|std::ios::binary);
-						if (inf)
-						{
-							inf.seekg(0, std::ios::end);
-							int len = (int)inf.tellg();
-							inf.seekg(std::ios::beg);
-							char *pbuf = new char[len+1];
-							ZeroMemory(pbuf, len+1);
-							inf.read(pbuf, len);
-							std::string sv(pbuf);
-							delete [] pbuf;
-							inf.close();
-							durl = string2wstring(sv);
-							DeleteFile(filepath.c_str());
-						}
+						TCHAR durl[1000]={0};
+						StringCchPrintf(durl, _countof(durl),  _T("http://%s/ft_wmi_exporter/test/ft_wmi_exporter-%s.exe"), getOssBucket().c_str(), pd->m_newVer.c_str());
 
-						if (durl.empty())
+						//std::wstring durl = "http://" + getOssBucket() + _T("/ft_wmi_exporter/test/ft_wmi_exporter-") + m_newVer + _T(".exe");
+						//std::wstring filepath = getTargetInstallDir()+ _T("\\dowload_url");
+						//std::ifstream inf(wide2string(filepath).c_str(), std::ios::in|std::ios::binary);
+						//if (inf)
+						//{
+						//	inf.seekg(0, std::ios::end);
+						//	int len = (int)inf.tellg();
+						//	inf.seekg(std::ios::beg);
+						//	char *pbuf = new char[len+1];
+						//	ZeroMemory(pbuf, len+1);
+						//	inf.read(pbuf, len);
+						//	std::string sv(pbuf);
+						//	delete [] pbuf;
+						//	inf.close();
+						//	durl = string2wstring(sv);
+						//	DeleteFile(filepath.c_str());
+						//}
+
+						if (durl[0] == _T('\0'))
 						{
 							EnableWindow(pd->hDownloadBtn, TRUE);
 							MessageBox(NULL, _T("获取下载地址失败"), MB_TITLE_TEXT, MB_OK|MB_ICONWARNING);
@@ -74,7 +78,7 @@ namespace CloudCare
 
 						//MessageBox(NULL, durl.c_str(), MB_TITLE_TEXT, MB_OK);
 
-						ShellExecute(nullptr, _T("open"), durl.c_str(), NULL, NULL, SW_SHOWNORMAL);
+						ShellExecute(nullptr, _T("open"), durl, NULL, NULL, SW_SHOWNORMAL);
 						EndDialog(hDlg, 0);
 					}
 					break;
